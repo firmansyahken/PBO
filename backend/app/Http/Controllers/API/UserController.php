@@ -85,10 +85,10 @@ class UserController extends Controller
 
         try {
             $user = Auth::user();
-            User::find($user->id)->update($request->all());
+            User::where("id",$user->id)->update($request->all());
             $response = [
                 "message" => "Update Success",
-                "data" => User::find($user->id)->first()
+                "data" => User::where("id", $user->id)->first()
             ];
             return response()->json($response);
         } catch (QueryException $e) {
