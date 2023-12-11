@@ -38,6 +38,7 @@ const Register = () => {
     try {
       await axios.post(`${BASE_API}/user/register`, formData);
       setSuccess(true);
+      setPhoto(null)
       return e.target.reset();
     } catch (error) {
       if (
@@ -54,7 +55,7 @@ const Register = () => {
   return (
     <div className="flex max-w-[920px] mx-auto items-center h-screen w-full">
       <div className="w-full px-6 py-6">
-        {success && <FlashMessage message="Registrasi Berhasil!" />}
+        {success && <FlashMessage type="success" message="Registrasi Berhasil!" />}
         <form onSubmit={handleSubmit} method="post">
           <div className="grid grid-cols-2 items-center gap-x-12 gap-y-6 mt-12">
             <div className="space-y-6">

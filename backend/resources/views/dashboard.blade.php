@@ -15,7 +15,7 @@
         <div class="col-md-4">
             <div class="card p-3 bg-warning">
                 <p>Jumlah Konsultasi</p>
-                <h1>12210</h1>
+                <h1>{{$consultation}}</h1>
             </div>
         </div>
     </div>
@@ -30,9 +30,9 @@
         new Chart(ctx, {
             type: 'line',
             data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: @json($labels),
             datasets: [{
-                data: [12, 19, 3, 5, 2, 3],
+                data: @json($consultationMonth),
                 borderWidth: 1,
                 backgroundColor: 'green',
             }]

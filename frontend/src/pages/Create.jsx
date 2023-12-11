@@ -37,7 +37,7 @@ const Create = () => {
             <div className="pb-12 space-y-6">
               <h1 className="text-xl font-bold mb-12">Buat Konsultasi</h1>
               {active && (
-                <FlashMessage message="Berhasil membuat konsultasi!" />
+                <FlashMessage type="success" message="Berhasil membuat konsultasi!" />
               )}
               <p className="text-md mb-4">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero,

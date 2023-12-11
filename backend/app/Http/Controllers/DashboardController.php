@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -10,10 +12,28 @@ class DashboardController extends Controller
     public function index() {
         $total_doctor = User::where("role", "doctor")->count();
         $total_pacient = User::where("role", "pacient")->count();
+        $total_consultation = Question::count();
+
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+
+        $dateLabels = [];
+        $consultations = [];
+        $currentDate = $startOfMonth->copy();
+
+        while ($currentDate->lte($endOfMonth)) {
+            $dateLabels[] = $currentDate->format('m-d');
+            $consultation = Question::whereDate("created_at", $currentDate)->count();
+            $consultations[] = $consultation;
+            $currentDate->addDay();
+        }
 
         $data = [
             "doctor" => $total_doctor,
-            "pacient" => $total_pacient
+            "pacient" => $total_pacient,
+            "consultation" => $total_consultation,
+            "consultationMonth" => $consultations,
+            "labels" => $dateLabels
         ];
         return view("dashboard", $data);
     }

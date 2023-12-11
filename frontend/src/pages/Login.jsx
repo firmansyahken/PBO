@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Validation } from "../components";
+import { Input, Validation, FlashMessage } from "../components";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_API } from "../utils/Constant";
 import { useAuth } from "../context/AuthContext";
@@ -58,6 +58,9 @@ const Login = () => {
               <form onSubmit={handleSubmit}>
                 <h1 className="text-2xl font-bold">Masuk</h1>
                 <div className="space-y-6 py-12">
+                  {active && (
+                    <FlashMessage type="danger" message="Username atau Password salah!" />
+                  )}
                   <div className="flex flex-col gap-2">
                     <label>Email</label>
                     <Input onChange={handleInput} name="email" type="text" />
